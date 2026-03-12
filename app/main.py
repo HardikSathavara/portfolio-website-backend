@@ -1,24 +1,31 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 from app.routers import inquiry
+from app.services import gs_service
 
-app = FastAPI(title="M3GAN AI Backend")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # This runs on Startup
+    gs_service.connect()
+    yield
+    # This runs on Shutdown
+    print("Server shutting down...")
 
-# CORS
+app = FastAPI(title="M3GAN AI API", lifespan=lifespan)
+
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include Routers
-app.include_router(inquiry.app_router)
+# Include the router
+app.include_router(inquiry.router)
 
 @app.get("/")
 async def root():
-    return {"message": "M3GAN AI API is online"}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    return {"message": "M3GAN AI API is running"}
