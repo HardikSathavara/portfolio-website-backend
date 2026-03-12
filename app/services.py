@@ -29,6 +29,8 @@ class GoogleSheetsService:
 
                     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_info, self.scope)
                 except:
+                    
+                    creds_json = json.loads(creds_json)
                     # Use environment variable (Production/Vercel)
                     # vercel {} format accept
                     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, self.scope)
