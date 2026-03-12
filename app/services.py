@@ -1,7 +1,7 @@
-import gspread
 import os
+import json
+import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,26 +9,20 @@ load_dotenv()
 class GoogleSheetsService:
     def __init__(self):
         self.scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-        self.creds_path = os.getenv("CREDS_FILE", "m3gan_credentials.json")
         self.sheet_name = os.getenv("SHEET_NAME", "M3GAN AI")
         self.client = self._authenticate()
         self.sheet = self.client.open(self.sheet_name).sheet1
 
     def _authenticate(self):
-        creds = ServiceAccountCredentials.from_json_keyfile_name(self.creds_path, self.scope)
+        # Read from Env Var (Vercel) or Fallback to File (Local)
+        creds_json = os.getenv("GOOGLE_CREDS_JSON")
+        
+        if creds_json:
+            # Parse the string into a dictionary
+            creds_info = json.loads(creds_json)
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_info, self.scope)
+        else:
+            # Fallback for local development
+            creds = ServiceAccountCredentials.from_json_keyfile_name("m3gan_credentials.json", self.scope)
+            
         return gspread.authorize(creds)
-
-    def append_inquiry(self, inquiry_data):
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        row = [
-            inquiry_data.name,
-            inquiry_data.email,
-            inquiry_data.country,
-            inquiry_data.mobile,
-            inquiry_data.message,
-            timestamp
-        ]
-        return self.sheet.append_row(row)
-
-# Create a single instance to be used across the app
-gs_service = GoogleSheetsService()
