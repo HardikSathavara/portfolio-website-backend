@@ -1,4 +1,4 @@
 *.env
 *__pycache__
 *venv
-*.json
+*m3gan_credentials.json
