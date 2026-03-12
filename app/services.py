@@ -23,15 +23,15 @@ class GoogleSheetsService:
             if creds_json:
 
                 try:
-                    # Use environment variable (Production/Vercel)
+                    # local environment - read files
                     with open(creds_json, 'r') as file:
                         creds_info = json.load(file)
 
                     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_info, self.scope)
                 except:
-                    creds_info = json.loads(file)
-                    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_info, self.scope)
-
+                    # Use environment variable (Production/Vercel)
+                    # vercel {} format accept
+                    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, self.scope)
             else:
                 # Use local file (Development)
                 creds = ServiceAccountCredentials.from_json_keyfile_name("m3gan_credentials.json", self.scope)
