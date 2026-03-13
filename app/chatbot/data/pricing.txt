@@ -1,0 +1,20 @@
+Q: What is the cost of building a RAG system?
+A: The cost of a RAG (Retrieval-Augmented Generation) system depends on complexity, data size, and integrations. A basic RAG pipeline typically starts from $500.
+
+Q: How much do AI automation solutions cost?
+A: AI automation solutions usually start from $300 depending on the workflow complexity and the systems that need to be integrated.
+
+Q: What is the cost of developing APIs?
+A: API development projects usually start from $150 and vary based on the number of endpoints and integrations required.
+
+Q: How much does an AI agent cost?
+A: AI agents for customer support or business automation usually start from $400 depending on the features and integrations.
+
+Q: Do you provide custom pricing?
+A: Yes, we provide custom pricing depending on project requirements, integrations, and AI model usage.
+
+Q: Do you provide consultation before pricing?
+A: Yes, we provide a free consultation to understand your requirements before providing a final quote.
+
+Q: Do you provide ongoing support?
+A: Yes, we provide optional maintenance and support packages for AI systems and APIs.

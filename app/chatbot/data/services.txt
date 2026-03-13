@@ -1,0 +1,9 @@
+We provide AI solutions for businesses.
+
+Our services include RAG pipeline development for knowledge-based systems.
+
+We build AI agents that automate customer support and internal operations.
+
+We develop scalable APIs using FastAPI and integrate AI systems into existing business workflows.
+
+We provide business automation solutions using AI and custom integrations.

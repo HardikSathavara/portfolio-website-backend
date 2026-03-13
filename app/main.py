@@ -4,11 +4,18 @@ from contextlib import asynccontextmanager
 from app.inqury.inqury_services import gs_service
 from app.inqury import inqury_routers
 from app.chatbot import chatbot_routers
+from app.chatbot.rag.llm_manager import LLMManager
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # This runs on Startup
     gs_service.connect()
+
+    app.state.llm_manager = LLMManager()
+
+    print("LLM initialized")
+    
     yield
     # This runs on Shutdown
     print("Server shutting down...")
