@@ -1,6 +1,6 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException
-from app.schemas import InquiryCreate, InquiryResponse
-from app.services import gs_service
+from app.inqury.inqury_schemas import InquiryCreate, InquiryResponse
+from app.inqury.inqury_services import gs_service
 
 router = APIRouter(prefix="/inquiries", tags=["Inquiries"])
 

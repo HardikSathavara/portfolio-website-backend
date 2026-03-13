@@ -18,7 +18,6 @@ class GoogleSheetsService:
         creds_json = os.getenv("GOOGLE_CREDS_JSON")
         sheet_name = os.getenv("SHEET_NAME", "M3GAN AI")
 
-        print('=============creds_json===============', creds_json, type(creds_json))
         try:
             if creds_json:
 

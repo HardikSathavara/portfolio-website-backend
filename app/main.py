@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from app.routers import inquiry
-from app.services import gs_service
+from app.inqury.inqury_services import gs_service
+from app.inqury import inqury_routers
+from app.chatbot import chatbot_routers
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,7 +25,8 @@ app.add_middleware(
 )
 
 # Include the router
-app.include_router(inquiry.router)
+app.include_router(inqury_routers.router)
+app.include_router(chatbot_routers.router)
 
 @app.get("/")
 async def root():
